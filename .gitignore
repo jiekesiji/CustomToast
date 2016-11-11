@@ -1,0 +1,15 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/.idea
+/app/libs
+/app/src/test
+/app/src/androidTest
+/toastlibrary/src/androidTest
+/toastlibrary/src/test

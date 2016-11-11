@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="toast_common">#cc000000</color>
+    <color name="toast_fail">#ccF44336</color>
+    <color name="toast_remind">#ccFF5722</color>
+    <color name="toast_success">#cc4caf50</color>
+    <color name="toast_warn">#ccFFC107</color>
+
+</resources>
