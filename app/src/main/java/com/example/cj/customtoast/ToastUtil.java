@@ -19,7 +19,7 @@ public class ToastUtil {
     private static CustomToast setToast(int iconResId, String bgColor, String content) {
         return CustomToast.makeToast(mContext, content)
                 .setTextColor(Color.WHITE)
-                .setTextSize(18)
+                .setTextSize(22)
                 .setPadding(32, 24, 32, 24)
                 .setTextImage(iconResId)
                 .setTextImageSize(80, 80)
@@ -27,7 +27,6 @@ public class ToastUtil {
                 .setImagePadding(50)
                 .setBackgroundColor(Color.parseColor("#" + bgColor))
                 .setBackgroundRadius(10)
-                .setBackgroundAlpha(50)
                 .setGravity(Gravity.BOTTOM, 0, 100);
     }
 
