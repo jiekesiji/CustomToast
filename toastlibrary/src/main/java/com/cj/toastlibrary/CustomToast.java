@@ -384,7 +384,7 @@ public class CustomToast {
      * @return
      */
     public CustomToast setBackgroundAlpha(final int alpha){
-        if (alpha >100 || alpha < 0) return mToast;
+        if (alpha >255 || alpha < 0) return mToast;
         modifiUI(new Runnable() {
             @Override
             public void run() {
