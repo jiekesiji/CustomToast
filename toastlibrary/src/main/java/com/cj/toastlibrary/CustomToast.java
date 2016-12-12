@@ -379,6 +379,23 @@ public class CustomToast {
     }
 
     /**
+     * 设置背景的透明度
+     * @param alpha
+     * @return
+     */
+    public CustomToast setBackgroundAlpha(final int alpha){
+        if (alpha >100 || alpha < 0) return mToast;
+        modifiUI(new Runnable() {
+            @Override
+            public void run() {
+                gd.setAlpha(alpha);
+                linearLayout.setBackgroundDrawable(gd);
+            }
+        });
+        return mToast;
+    }
+
+    /**
      * 设置字体颜色
      *
      * @param color

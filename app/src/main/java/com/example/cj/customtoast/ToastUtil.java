@@ -27,6 +27,7 @@ public class ToastUtil {
                 .setImagePadding(50)
                 .setBackgroundColor(Color.parseColor("#" + bgColor))
                 .setBackgroundRadius(10)
+                .setBackgroundAlpha(50)
                 .setGravity(Gravity.BOTTOM, 0, 100);
     }
 
