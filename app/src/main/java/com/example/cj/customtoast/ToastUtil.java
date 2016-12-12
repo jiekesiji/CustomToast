@@ -24,7 +24,7 @@ public class ToastUtil {
                 .setTextImage(iconResId)
                 .setTextImageSize(80, 80)
                 .setTextImageLocation(CustomToast.LEFT)
-                .setImagePadding(50)
+                .setImagePadding(30)
                 .setBackgroundColor(Color.parseColor("#" + bgColor))
                 .setBackgroundRadius(10)
                 .setGravity(Gravity.BOTTOM, 0, 100);

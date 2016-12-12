@@ -138,11 +138,11 @@ public class CustomToast {
                 textView.setCompoundDrawables(null, null, null, null);
             }
         });
-        int defaultPadding  = DpUtil.px2dip(mContext,8);
+        int defaultPadding  = DpUtil.dip2px(mContext,8);
 
         setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding);
         setBackgroundColor(Color.parseColor("#88000000"));
-        setBackgroundRadius(DpUtil.px2dip(mContext,20));
+        setBackgroundRadius(DpUtil.dip2px(mContext,20));
     }
 
     /**
@@ -156,7 +156,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                int boundsSize = DpUtil.px2dip(mContext,(int) textView.getTextSize());
+                int boundsSize = DpUtil.dip2px(mContext,(int) textView.getTextSize());
                 drawable.setBounds(0, 0, boundsSize, boundsSize);
                 textView.setCompoundDrawables(drawable, null, null, null);
             }
@@ -180,7 +180,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                drawable.setBounds(0, 0, DpUtil.px2dip(mContext,width), DpUtil.px2dip(mContext,high));
+                drawable.setBounds(0, 0, width,high);
             }
         });
         imageFlag = true;
@@ -196,7 +196,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                textView.setCompoundDrawablePadding(DpUtil.px2dip(mContext,pad));
+                textView.setCompoundDrawablePadding(pad);
             }
         });
 
@@ -421,7 +421,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                textView.setTextSize(DpUtil.px2dip(mContext,size));
+                textView.setTextSize(size);
             }
         });
 
@@ -441,8 +441,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                linearLayout.setPadding(DpUtil.px2dip(mContext,left), DpUtil.px2dip(mContext,top),
-                        DpUtil.px2dip(mContext,right), DpUtil.px2dip(mContext,bottom));
+                linearLayout.setPadding(left,top,right,bottom);
             }
         });
         return mToast;
