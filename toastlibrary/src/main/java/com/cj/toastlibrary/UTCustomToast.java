@@ -19,9 +19,9 @@ import android.widget.Toast;
 /**
  * 自定义Toast，可设置背景，设置图片
  */
-public class CustomToast {
+public class UTCustomToast extends Toast{
 
-    private static CustomToast mToast;//土司对象
+    private static UTCustomToast mToast;//土司对象
 
     private WindowManager.LayoutParams params;//窗口管理器的布局参数
     private static WindowManager windowManager;
@@ -52,8 +52,12 @@ public class CustomToast {
 
     private static boolean isMainThread = true;
 
+    public UTCustomToast(Context context) {
+        super(context);
+    }
 
-    private CustomToast(Context context, String msg) {
+    private UTCustomToast(Context context, String msg) {
+        super(context);
         initView(context, msg);
         initParams();
     }
@@ -63,7 +67,7 @@ public class CustomToast {
      * @param msg     toast显示文本
      * @return
      */
-    public static CustomToast makeToast(Context context, final String msg) {
+    public static UTCustomToast makeToast(Context context, final String msg) {
         mContext = context;
         windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
@@ -74,9 +78,9 @@ public class CustomToast {
         isMainThread = Looper.getMainLooper() == Looper.myLooper();
 
         if (mToast == null) {
-            synchronized (CustomToast.class) {
+            synchronized (UTCustomToast.class) {
                 if (mToast == null) {
-                    mToast = new CustomToast(context, msg);
+                    mToast = new UTCustomToast(context, msg);
                 }
             }
         }
@@ -94,7 +98,7 @@ public class CustomToast {
         return mToast;
     }
 
-    private void modifiUI(Runnable runnable){
+    private void modifiUI(Runnable runnable) {
         textView.post(runnable);
     }
 
@@ -138,11 +142,11 @@ public class CustomToast {
                 textView.setCompoundDrawables(null, null, null, null);
             }
         });
-        int defaultPadding  = DpUtil.dip2px(mContext,8);
+        int defaultPadding = DpUtil.dip2px(mContext, 8);
 
         setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding);
         setBackgroundColor(Color.parseColor("#88000000"));
-        setBackgroundRadius(DpUtil.dip2px(mContext,20));
+        setBackgroundRadius(DpUtil.dip2px(mContext, 20));
     }
 
     /**
@@ -151,12 +155,12 @@ public class CustomToast {
      * @param resId 图片资源id
      * @return
      */
-    public CustomToast setTextImage(int resId) {
+    public UTCustomToast setTextImage(int resId) {
         drawable = mContext.getResources().getDrawable(resId);
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                int boundsSize = DpUtil.dip2px(mContext,(int) textView.getTextSize());
+                int boundsSize = DpUtil.dip2px(mContext, (int) textView.getTextSize());
                 drawable.setBounds(0, 0, boundsSize, boundsSize);
                 textView.setCompoundDrawables(drawable, null, null, null);
             }
@@ -172,7 +176,7 @@ public class CustomToast {
      * @param high
      * @return
      */
-    public CustomToast setTextImageSize(final int width,final int high) {
+    public UTCustomToast setTextImageSize(final int width, final int high) {
         if (drawable == null) {
             throw new IllegalAccessError("Please use the method of setTextImage first");
         }
@@ -180,7 +184,7 @@ public class CustomToast {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                drawable.setBounds(0, 0, width,high);
+                drawable.setBounds(0, 0, width, high);
             }
         });
         imageFlag = true;
@@ -189,10 +193,11 @@ public class CustomToast {
 
     /**
      * 设置文字和图片之间的距离
+     *
      * @param pad
      * @return
      */
-    public CustomToast setImagePadding(final int pad) {
+    public UTCustomToast setImagePadding(final int pad) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -205,10 +210,11 @@ public class CustomToast {
 
     /**
      * 如果要设置图片的大小，先设置图片的大小再调用该方法
+     *
      * @param imageLocation 图片位置
      * @return
      */
-    public CustomToast setTextImageLocation(final int imageLocation) {
+    public UTCustomToast setTextImageLocation(final int imageLocation) {
 
         if (!imageFlag && drawable.getIntrinsicWidth() != textView.getTextSize()
                 && drawable.getIntrinsicWidth() != textView.getTextSize()) {
@@ -236,10 +242,11 @@ public class CustomToast {
 
     /**
      * 设置Toast显示时长
+     *
      * @param duration
      * @return
      */
-    public CustomToast setDuration(int duration) {
+    public UTCustomToast setShowDuration(int duration) {
         if (duration == Toast.LENGTH_SHORT) {
             this.duration = 1000;
         } else if (duration == Toast.LENGTH_LONG) {
@@ -254,16 +261,16 @@ public class CustomToast {
      * 显示Toast
      */
     public void showMToast() {
-        if (isMainThread){
-            show();
-        }else{
+        if (isMainThread) {
+            showToast();
+        } else {
             Looper.prepare();
-            if (show()) return;
+            if (showToast()) return;
             Looper.loop();
         }
     }
 
-    private boolean show() {
+    private boolean showToast() {
         if (linearLayout.getParent() != null && preView == linearLayout) return true;
 
         windowManager.addView(linearLayout, params);
@@ -308,7 +315,7 @@ public class CustomToast {
      *
      * @return
      */
-    public CustomToast clearSetting() {
+    public UTCustomToast clearSetting() {
         //说明当前有Toast正在显示，先将它移除，在清空做操作
         if (linearLayout.getParent() != null) windowManager.removeView(linearLayout);
 
@@ -334,7 +341,7 @@ public class CustomToast {
      * @param yOffset
      * @return
      */
-    public CustomToast setGravity(int gravity, int xOffset, int yOffset) {
+    public UTCustomToast setToastGravity(int gravity, int xOffset, int yOffset) {
         params.gravity = gravity;
         params.x = xOffset;
         params.y = yOffset;
@@ -348,7 +355,7 @@ public class CustomToast {
      * @param color
      * @return
      */
-    public CustomToast setBackgroundColor(final int color) {
+    public UTCustomToast setBackgroundColor(final int color) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -366,7 +373,7 @@ public class CustomToast {
      * @param roundRadius
      * @return
      */
-    public CustomToast setBackgroundRadius(final int roundRadius) {
+    public UTCustomToast setBackgroundRadius(final int roundRadius) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -380,11 +387,12 @@ public class CustomToast {
 
     /**
      * 设置背景的透明度
+     *
      * @param alpha
      * @return
      */
-    public CustomToast setBackgroundAlpha(final int alpha){
-        if (alpha >255 || alpha < 0) return mToast;
+    public UTCustomToast setBackgroundAlpha(final int alpha) {
+        if (alpha > 255 || alpha < 0) return mToast;
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -401,7 +409,7 @@ public class CustomToast {
      * @param color
      * @return
      */
-    public CustomToast setTextColor(final int color){
+    public UTCustomToast setTextColor(final int color) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -417,7 +425,7 @@ public class CustomToast {
      * @param size
      * @return
      */
-    public CustomToast setTextSize(final int size) {
+    public UTCustomToast setTextSize(final int size) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
@@ -437,11 +445,11 @@ public class CustomToast {
      * @param bottom 下边距
      * @return
      */
-    public CustomToast setPadding(final int left, final int top, final int right,final int bottom) {
+    public UTCustomToast setPadding(final int left, final int top, final int right, final int bottom) {
         modifiUI(new Runnable() {
             @Override
             public void run() {
-                linearLayout.setPadding(left,top,right,bottom);
+                linearLayout.setPadding(left, top, right, bottom);
             }
         });
         return mToast;
@@ -457,8 +465,20 @@ public class CustomToast {
         params.format = PixelFormat.TRANSLUCENT;
         params.gravity = Gravity.CENTER;//设置默认坐标原点为左上角
 
-        params.type = WindowManager.LayoutParams.TYPE_TOAST;
+        params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+
+//        final WindowManager.LayoutParams params = mParams;
+//        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//        params.format = PixelFormat.TRANSLUCENT;
+//        params.windowAnimations = com.android.internal.R.style.Animation_Toast;
+//        params.type = WindowManager.LayoutParams.TYPE_TOAST;
+//        params.setTitle("Toast");
+//        params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+//                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+//                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
     }
 }

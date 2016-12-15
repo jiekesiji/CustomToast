@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 
-import com.cj.toastlibrary.CustomToast;
+import com.cj.toastlibrary.UTCustomToast;
 
 /**
  * Created by 程杰 on 2016/10/31.
@@ -16,18 +16,18 @@ public class ToastUtil {
 
     private static Context mContext = App.getAppContext();
 
-    private static CustomToast setToast(int iconResId, String bgColor, String content) {
-        return CustomToast.makeToast(mContext, content)
+    private static UTCustomToast setToast(int iconResId, String bgColor, String content) {
+        return UTCustomToast.makeToast(mContext, content)
                 .setTextColor(Color.WHITE)
                 .setTextSize(22)
                 .setPadding(32, 24, 32, 24)
                 .setTextImage(iconResId)
                 .setTextImageSize(80, 80)
-                .setTextImageLocation(CustomToast.LEFT)
+                .setTextImageLocation(UTCustomToast.LEFT)
                 .setImagePadding(30)
                 .setBackgroundColor(Color.parseColor("#" + bgColor))
                 .setBackgroundRadius(10)
-                .setGravity(Gravity.BOTTOM, 0, 100);
+                .setToastGravity(Gravity.BOTTOM, 0, 100);
     }
 
     public static void success(String content) {

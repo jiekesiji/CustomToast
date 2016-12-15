@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cj.toastlibrary.UTCustomToast;
+import com.cj.toastlibrary.UTToast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,30 +23,21 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_common:
-                ToastUtil.common("普通弱提示");
+//                ToastUtil.common("普通弱提示");
+                UTToast.success(getApplicationContext(), UTCustomToast.LEFT);
+//                Toast.makeText(getApplicationContext(), "1212313", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_fail:
-                ToastUtil.fail("操作失败");
+                UTToast.fail(getApplicationContext(),UTCustomToast.LEFT);
                 break;
             case R.id.btn_remind:
-                ToastUtil.remind("提醒一下");
+                UTToast.remind(getApplicationContext(),UTCustomToast.LEFT);
                 break;
             case R.id.btn_success:
-                new Thread(){
-                    @Override
-                    public void run() {
-                        ToastUtil.success("操作成功");
-                    }
-                }.start();
+                UTToast.warn(getApplicationContext(),UTCustomToast.LEFT);
                 break;
             case R.id.btn_warn:
-                new Thread() {
-                    @Override
-                    public void run() {
-                        ToastUtil.warn("严重警告");
-                    }
-                }.start();
-
+                Toast.makeText(this, "xxx", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
